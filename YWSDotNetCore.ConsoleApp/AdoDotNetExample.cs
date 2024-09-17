@@ -168,5 +168,64 @@ namespace YWSDotNetCore.ConsoleApp
             Console.WriteLine(dr["BlogContent"]);
 
         }
+
+        public void Update()
+        {
+            Console.WriteLine("Enter Blog Id");
+            string id = Console.ReadLine();
+
+            Console.WriteLine("Enter Blog Title");
+            string title = Console.ReadLine();
+
+            Console.WriteLine("Enter Blog Author");
+            string author = Console.ReadLine();
+
+            Console.WriteLine("Enter Blog Content");
+            string content = Console.ReadLine();
+
+
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            string query = $@"UPDATE [dbo].[Tbl_Blog]
+   SET [BlogTitle] = @BlogTitle
+      ,[BlogAuthor] = @BlogAuthor
+      ,[BlogContent] = @BlogContent
+      ,[DeleteFlag] = 0
+ WHERE BlogId = @BlogId";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@BlogId", id);
+            cmd.Parameters.AddWithValue("@BlogTitle", title);
+            cmd.Parameters.AddWithValue("@BlogAuthor", author);
+            cmd.Parameters.AddWithValue("@BlogContent", content);
+
+            int result = cmd.ExecuteNonQuery();
+
+            connection.Close();
+
+            Console.WriteLine(result == 1 ? "Update Successful" : "Update Failed");
+
+
+        }
+
+        public void Delete()
+        {
+            Console.Write("Enter BlogId : ");
+            string id = Console.ReadLine();
+
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            string query = @"DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@BlogId", id);
+            int result = cmd.ExecuteNonQuery();
+
+            connection.Close();
+
+            Console.WriteLine(result == 1 ? "Delete Successful" : "Delete Failed");
+
+        }
     }
 }

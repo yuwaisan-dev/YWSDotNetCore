@@ -8,7 +8,7 @@ using YWSDotNetCore.ConsoleApp.Models;
 
 namespace YWSDotNetCore.ConsoleApp
 {
-    public class AppDbConnect:DbContext
+    public class AppDbContext:DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

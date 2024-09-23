@@ -12,7 +12,7 @@ namespace YWSDotNetCore.ConsoleApp
     {
         public void Read()
         {
-            AppDbConnect db = new AppDbConnect();
+            AppDbContext db = new AppDbContext();
             var lst = db.Blogs.Where(x => x.DeleteFlag == false).ToList();
             foreach (var item in lst)
             {
@@ -32,7 +32,7 @@ namespace YWSDotNetCore.ConsoleApp
                 BlogAuthor = author,
                 BlogContent = content
             };
-            AppDbConnect db = new AppDbConnect();
+            AppDbContext db = new AppDbContext();
             db.Blogs.Add(blog);
             var result = db.SaveChanges();
 
@@ -42,7 +42,7 @@ namespace YWSDotNetCore.ConsoleApp
 
         public void Edit(int id) 
         {
-            AppDbConnect db = new AppDbConnect();
+            AppDbContext db = new AppDbContext();
             // db.Blogs.Where(x => x.BlogId == id).FirstOrDefault();
             var item =  db.Blogs.FirstOrDefault(x => x.BlogId == id);
             if (item is null)
@@ -60,7 +60,7 @@ namespace YWSDotNetCore.ConsoleApp
 
         public void Update(int id,string title, string author, string content)
         {
-            AppDbConnect db = new AppDbConnect();
+            AppDbContext db = new AppDbContext();
             // db.Blogs.Where(x => x.BlogId == id).FirstOrDefault();
             var item = db.Blogs
                 .AsNoTracking()
@@ -92,7 +92,7 @@ namespace YWSDotNetCore.ConsoleApp
 
         public void Delete(int id)
         {
-            AppDbConnect db = new AppDbConnect();
+            AppDbContext db = new AppDbContext();
             // db.Blogs.Where(x => x.BlogId == id).FirstOrDefault();
             var item = db.Blogs
                 .AsNoTracking()

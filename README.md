@@ -23,3 +23,8 @@ visual studio 2022
 windows
 
 UI + Business Logic + Data Access => Database
+
+
+
+
+dotnet ef dbcontext scaffold "Server=.;Database=YWSDotNetCore;User Id=sa;Password=sasa@123;TrustServerCertificate=True;" Microsoft.EntityFrameWorkCore.SqlServer -o Models -c AppDbContext -f ;

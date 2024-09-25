@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using YWSDotNetCore.Database2.Models;
 
 namespace YWSDotNetCore.RestApi.Controllers
 {
@@ -7,16 +9,37 @@ namespace YWSDotNetCore.RestApi.Controllers
     [ApiController]
     public class BlogsController : ControllerBase
     {
+
+        private readonly AppDbContext _db = new AppDbContext();
+
         [HttpGet]
         public IActionResult GetBlogs()
         {
-            return Ok();
+            var lst = _db.TblBlogs.AsNoTracking().ToList();
+            //return Ok(new {Message = "GetBlogs"});
+            return Ok(lst);
         }
 
-        [HttpPost]
-        public IActionResult CreateBlog()
+
+        [HttpGet("{id}")]
+        public IActionResult GetBlog(int id)
         {
-            return Ok();
+            var item = _db.TblBlogs.AsNoTracking().FirstOrDefault(x => x.BlogId == id);
+            if(item is null)
+            {
+                return NotFound();
+            }
+            return Ok(item);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult CreateBlog(TblBlog blog)
+        {
+            _db.TblBlogs.Add(blog);
+            _db.SaveChanges();
+            return Ok(blog);
         }
 
         [HttpPut]

@@ -13,7 +13,7 @@ namespace YWSDotNetCore.ConsoleApp
 
     public class DapperExample
     {
-        public readonly string _connectionString = "Data Source=.;Initial Catalog=YWSDotNetCore;User ID=sa;Password=sasa@123";
+        private readonly string _connectionString = "Data Source=.;Initial Catalog=YWSDotNetCore;User ID=sa;Password=sasa@123";
 
         public void Read()
         {

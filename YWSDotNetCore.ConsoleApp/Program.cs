@@ -46,8 +46,8 @@ EFCoreExample eFCoreExample = new EFCoreExample();
 //eFCoreExample.Read();
 //eFCoreExample.Create("efCoreTitle", "efCoreAuthor", "efCoreContent");
 //eFCoreExample.Edit(14);
-//eFCoreExample.Update(14, "test", "test", "test");
-eFCoreExample.Delete(14);
+eFCoreExample.Update(8, "test","test","test");
+//eFCoreExample.Delete(14);
 
 
 Console.ReadKey();

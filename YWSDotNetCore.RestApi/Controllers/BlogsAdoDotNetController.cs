@@ -65,7 +65,6 @@ namespace YWSDotNetCore.RestApi.Controllers
 
         }
 
-
         [HttpGet("{id}")]
         public IActionResult GetBlog(int id)
         {
@@ -106,8 +105,6 @@ namespace YWSDotNetCore.RestApi.Controllers
             return Ok(blog);
 
         }
-
-
 
         [HttpPost]
         public IActionResult CreateBlog(BlogDataModel blog)

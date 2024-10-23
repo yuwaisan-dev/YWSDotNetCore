@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Threading.Tasks;
+using YWSDotNetCore.RestApi.DataModels;
 using YWSDotNetCore.RestApi.ViewModels;
 
 namespace YWSDotNetCore.RestApi.Controllers
@@ -35,6 +37,27 @@ namespace YWSDotNetCore.RestApi.Controllers
 
             connection.Close();
             return Ok(categories);
+        }
+
+        [HttpPost]
+        public IActionResult CreateTaskCategory(TaskCategoryDataModel category)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            string query = @"INSERT INTO [dbo].[TaskCategory]
+           ([CategoryName])
+     VALUES
+           (@CategoryName)";
+            SqlCommand cmd2 = new SqlCommand(query, connection);
+            cmd2.Parameters.AddWithValue("@CategoryName", category.CategoryName);
+            
+            int result = cmd2.ExecuteNonQuery();
+
+            connection.Close();
+
+            return Ok(result > 0 ? "Create Successful" : "Create Failed");
+
         }
     }
 }

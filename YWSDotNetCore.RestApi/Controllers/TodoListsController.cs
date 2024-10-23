@@ -54,6 +54,48 @@ namespace YWSDotNetCore.RestApi.Controllers
             connection.Close();
             return Ok(taskViewModels);
         }
+
+        [HttpPost]
+        public IActionResult CreateTask(TodoListDataMoedl task)
+        { 
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            string query = @"INSERT INTO [dbo].[ToDoList]
+           ([TaskTitle]
+           ,[TaskDescription]
+           ,[CategoryID]
+           ,[PriorityLevel]
+           ,[Status]
+           ,[DueDate]
+           ,[CreatedDate]
+           ,[CompletedDate])
+     VALUES
+           (@TaskTitle
+           ,@TaskDescription
+           ,@CategoryID
+           ,@PriorityLevel
+           ,@Status
+           ,@DueDate
+           ,@CreatedDate
+           ,@CompletedDate)";
+            SqlCommand cmd2 = new SqlCommand(query, connection);
+            cmd2.Parameters.AddWithValue("@TaskTitle", task.TaskTitle);
+            cmd2.Parameters.AddWithValue("@TaskDescription", task.TaskDescription);
+            cmd2.Parameters.AddWithValue("@CategoryID", task.CategoryID);
+            cmd2.Parameters.AddWithValue("@PriorityLevel",task.PriorityLevel);
+            cmd2.Parameters.AddWithValue("@Status", task.Status);
+            cmd2.Parameters.AddWithValue("@DueDate", task.DueDate);
+            cmd2.Parameters.AddWithValue("@CreatedDate", task.CreatedDate);
+            cmd2.Parameters.AddWithValue("@CompletedDate", task.CompletedDate);
+
+            int result = cmd2.ExecuteNonQuery();
+
+            connection.Close();
+
+            return Ok(result > 0 ? "Create Successful" : "Create Failed");
+
+        }
     }
         
 }

@@ -59,5 +59,21 @@ namespace YWSDotNetCore.RestApi.Controllers
             return Ok(result > 0 ? "Create Successful" : "Create Failed");
 
         }
+
+        [HttpDelete]
+        public IActionResult DeleteCategory(int id)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            string query = @"DELETE FROM [dbo].[TaskCategory]
+      WHERE CategoryID = @CategoryID";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@CategoryID", id);
+            int result = cmd.ExecuteNonQuery();
+
+            connection.Close();
+            return Ok(result > 0 ? "Delete successful" : "Delete failed");
+        }
     }
 }

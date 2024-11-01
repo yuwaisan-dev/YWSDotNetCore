@@ -96,20 +96,25 @@ namespace YWSDotNetCore.ConsoleApp
                                    ,@BlogAuthor
                                    ,@BlogContent
                                    ,0)";
-           
-            int result = _adoDotNetService.Execute(query2, new SqlParameterModel
-            {
-                Name = "@BlogTitle",
-                Value = title
-            }, new SqlParameterModel
-            {
-                Name = "@BlogAuthor",
-                Value = author
-            }, new SqlParameterModel
-            {
-                Name = "@BlogContent",
-                Value = content
-            });
+
+            //int result = _adoDotNetService.Execute(query2, new SqlParameterModel
+            //{
+            //    Name = "@BlogTitle",
+            //    Value = title
+            //}, new SqlParameterModel
+            //{
+            //    Name = "@BlogAuthor",
+            //    Value = author
+            //}, new SqlParameterModel
+            //{
+            //    Name = "@BlogContent",
+            //    Value = content
+            //});
+            int result = _adoDotNetService.Execute(query2,
+                new SqlParameterModel("@BlogTitle", title),
+                new SqlParameterModel("@BlogAuthor", author),
+                new SqlParameterModel("@BlogContent", content)
+                );
 
             Console.WriteLine(result == 1 ? "Saving Successful" : "Saving Failed");
 
@@ -135,23 +140,29 @@ namespace YWSDotNetCore.ConsoleApp
                                       ,[BlogContent] = @BlogContent
                                       ,[DeleteFlag] = 0
                                  WHERE BlogId = @BlogId";
-            int result = _adoDotNetService.Execute(query, new SqlParameterModel
-            {
-                Name = "@BlogId",
-                Value = id
-            }, new SqlParameterModel
-            {
-                Name = "@BlogTitle",
-                Value = title
-            }, new SqlParameterModel
-            {
-                Name = "@BlogAuthor",
-                Value = author
-            }, new SqlParameterModel
-            {
-                Name = "@BlogContent",
-                Value = content
-            });
+            //int result = _adoDotNetService.Execute(query, new SqlParameterModel
+            //{
+            //    Name = "@BlogId",
+            //    Value = id
+            //}, new SqlParameterModel
+            //{
+            //    Name = "@BlogTitle",
+            //    Value = title
+            //}, new SqlParameterModel
+            //{
+            //    Name = "@BlogAuthor",
+            //    Value = author
+            //}, new SqlParameterModel
+            //{
+            //    Name = "@BlogContent",
+            //    Value = content
+            //});
+            int result = _adoDotNetService.Execute(query,
+               new SqlParameterModel("@BlogId",id),
+               new SqlParameterModel("@BlogTitle", title),
+               new SqlParameterModel("@BlogAuthor", author),
+               new SqlParameterModel("@BlogContent", content)
+               );
 
             Console.WriteLine(result == 1 ? "Update Successful" : "Update Failed");
 
@@ -164,11 +175,12 @@ namespace YWSDotNetCore.ConsoleApp
 
             string query = @"DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId";
 
-            int result = _adoDotNetService.Execute(query, new SqlParameterModel
-            {
-                Name = "@BlogId",
-                Value = id
-            });
+            //int result = _adoDotNetService.Execute(query, new SqlParameterModel
+            //{
+            //    Name = "@BlogId",
+            //    Value = id
+            //});
+            int result = _adoDotNetService.Execute(query, new SqlParameterModel("@BlogId", id));
             Console.WriteLine(result == 1 ? "Delete Successful" : "Delete Failed");
 
         }

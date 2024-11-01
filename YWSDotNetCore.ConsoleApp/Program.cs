@@ -42,12 +42,28 @@ Console.ReadKey();
 
 
 //EFCore => CRUd
-EFCoreExample eFCoreExample = new EFCoreExample();
+//CoreExample eFCoreExample = new EFCoreExample();
 //eFCoreExample.Read();
 //eFCoreExample.Create("efCoreTitle", "efCoreAuthor", "efCoreContent");
 //eFCoreExample.Edit(14);
-eFCoreExample.Update(8, "test","test","test");
+//CoreExample.Update(8, "test","test","test");
 //eFCoreExample.Delete(14);
+
+//AdodotnetService CRUD
+//AdoDotNetExample2 adoDotNetExample2 = new AdoDotNetExample2();
+//adoDotNetExample2.Read();
+//adoDotNetExample2.Create();
+//adoDotNetExample2.Update();
+//adoDotNetExample2.Edit();
+//adoDotNetExample2.Delete();
+
+//DapperService CRUD
+DapperExample2 dapperExample2 = new DapperExample2();
+//dapperExample2.Read();
+//dapperExample2.Create("dapperService","dapperService","dapperService");
+//dapperExample2.Edit(8);
+//dapperExample2.Update(8,"dapperService","dapperService","dapperSerice");
+dapperExample2.Delete(9);
 
 
 Console.ReadKey();

@@ -16,7 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YWSDotNetCore.ConsoleApp2",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YWSDotNetCore.RestApi", "YWSDotNetCore.RestApi\YWSDotNetCore.RestApi.csproj", "{240BAC5D-1D58-4F31-A6A9-FF8F3815E6D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YWSDotNetCore.Shared", "YWSDotNetCore.Shared\YWSDotNetCore.Shared.csproj", "{5E4DB218-83F5-4AC0-AC53-40B245F61848}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YWSDotNetCore.Shared", "YWSDotNetCore.Shared\YWSDotNetCore.Shared.csproj", "{5E4DB218-83F5-4AC0-AC53-40B245F61848}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YWSDotNetCore.MinimalApi", "YWSDotNetCore.MinimalApi\YWSDotNetCore.MinimalApi.csproj", "{0FCB5DEC-CCA8-4EC2-9842-A75D1760F33A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{5E4DB218-83F5-4AC0-AC53-40B245F61848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E4DB218-83F5-4AC0-AC53-40B245F61848}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E4DB218-83F5-4AC0-AC53-40B245F61848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FCB5DEC-CCA8-4EC2-9842-A75D1760F33A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FCB5DEC-CCA8-4EC2-9842-A75D1760F33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FCB5DEC-CCA8-4EC2-9842-A75D1760F33A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FCB5DEC-CCA8-4EC2-9842-A75D1760F33A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

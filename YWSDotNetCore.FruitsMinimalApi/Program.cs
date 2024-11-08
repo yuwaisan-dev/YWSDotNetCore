@@ -38,33 +38,32 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-app.MapGet("/birds", () =>
+app.MapGet("/fruits",() =>
 {
-    string folderPath = "Data/Birds.json";
+    string folderPath = "Data/fruits.json";
     var jsonStr = File.ReadAllText(folderPath);
-    var result = JsonConvert.DeserializeObject<BirdResponseModel>(jsonStr);
-    return Results.Ok(result.Tbl_Bird);
+    var result = JsonConvert.DeserializeObject<FruitsResponseModel>(jsonStr);
+
+    return Results.Ok(result);
 })
-.WithName("GetBirds")
+.WithName("GetFruits")
 .WithOpenApi();
 
-app.MapGet("/birds/{id}", (int id) =>
+app.MapGet("/fruits/{id}", (int id) =>
 {
-    string folderPath = "Data/Birds.json";
+    string folderPath = "Data/fruits.json";
     var jsonStr = File.ReadAllText(folderPath);
-    var result = JsonConvert.DeserializeObject<BirdResponseModel>(jsonStr)!;
+    var result = JsonConvert.DeserializeObject<FruitsResponseModel>(jsonStr);
 
-    var item = result.Tbl_Bird.FirstOrDefault(x => x.Id == id);
+    var item = result.fruits.FirstOrDefault(x => x.id == id);
 
-    if(item is null)
-    {
-        return Results.BadRequest("No Data Found");
-    }
+    if (item is null) return Results.BadRequest("No Data Found");
 
     return Results.Ok(item);
 })
-.WithName("GetBird")
+.WithName("GetFruit")
 .WithOpenApi();
+
 
 app.Run();
 
@@ -74,19 +73,17 @@ internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary
 }
 
 
-
-
-public class BirdResponseModel
+public class FruitsResponseModel
 {
-    public BirdModel[] Tbl_Bird { get; set; }
+    public Fruit[] fruits { get; set; }
 }
 
-public class BirdModel
-
+public class Fruit
 {
-    public int Id { get; set; }
-    public string BirdMyanmarName { get; set; }
-    public string BirdEnglishName { get; set; }
-    public string Description { get; set; }
-    public string ImagePath { get; set; }
+    public int id { get; set; }
+    public string name { get; set; }
+    public string image { get; set; }
+    public int price { get; set; }
+    public float weight { get; set; }
 }
+

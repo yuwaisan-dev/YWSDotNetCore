@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YWSDotNetCore.MinimalApi", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YWSDotNetCore.BirdMinimalApi", "YWSDotNetCore.BirdMinimalApi\YWSDotNetCore.BirdMinimalApi.csproj", "{8656BE9A-8ED9-4376-A3F2-FF6374A42223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YWSDotNetCore.FruitsMinimalApi", "YWSDotNetCore.FruitsMinimalApi\YWSDotNetCore.FruitsMinimalApi.csproj", "{D908DF84-32C3-40BD-854B-7835563ECF98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YWSDotNetCore.FruitsMinimalApi", "YWSDotNetCore.FruitsMinimalApi\YWSDotNetCore.FruitsMinimalApi.csproj", "{D908DF84-32C3-40BD-854B-7835563ECF98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YWSDotNetCore.Domain", "YWSDotNetCore.Domain\YWSDotNetCore.Domain.csproj", "{AFC611AE-5A87-46FF-9E8A-D9C769B1F153}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +64,10 @@ Global
 		{D908DF84-32C3-40BD-854B-7835563ECF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D908DF84-32C3-40BD-854B-7835563ECF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D908DF84-32C3-40BD-854B-7835563ECF98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFC611AE-5A87-46FF-9E8A-D9C769B1F153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFC611AE-5A87-46FF-9E8A-D9C769B1F153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFC611AE-5A87-46FF-9E8A-D9C769B1F153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFC611AE-5A87-46FF-9E8A-D9C769B1F153}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,11 +7,15 @@ namespace YWSDotNetCore.RestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BlogsController : ControllerBase
+    public class BlogServiceController : ControllerBase
     {
 
-        private readonly AppDbContext _db = new AppDbContext();
+        private readonly BlogService _service;
 
+        public BlogServiceController()
+        {
+            _service = new BlogService();
+        }
         [HttpGet]
         public IActionResult GetBlogs()
         {
@@ -27,7 +31,7 @@ namespace YWSDotNetCore.RestApi.Controllers
         public IActionResult GetBlog(int id)
         {
             var item = _db.TblBlogs.AsNoTracking().FirstOrDefault(x => x.BlogId == id);
-            if(item is null)
+            if (item is null)
             {
                 return NotFound();
             }
@@ -43,7 +47,7 @@ namespace YWSDotNetCore.RestApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateBlog(int id,TblBlog blog)
+        public IActionResult UpdateBlog(int id, TblBlog blog)
         {
             var item = _db.TblBlogs.AsNoTracking().FirstOrDefault(x => x.BlogId == id);
             if (item is null)
@@ -62,7 +66,7 @@ namespace YWSDotNetCore.RestApi.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult PatchBlog(int id,TblBlog blog)
+        public IActionResult PatchBlog(int id, TblBlog blog)
         {
             var item = _db.TblBlogs.AsNoTracking().FirstOrDefault(x => x.BlogId == id);
             if (item is null)
@@ -102,10 +106,14 @@ namespace YWSDotNetCore.RestApi.Controllers
 
             _db.Entry(item).State = EntityState.Deleted;
             _db.SaveChanges();
-          
+
             return Ok();
 
 
         }
+    }
+
+    internal class BlogService
+    {
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,28 +9,31 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace YWSDotNetCore.ConsoleApp3
 {
-    internal class HttpClientExample
+    public class RestClientExample
     {
-        private readonly HttpClient _client = new HttpClient();
+
+        private readonly RestClient _client = new RestClient();
         private readonly string _postEndPoint = "https://jsonplaceholder.typicode.com/posts";
 
-        public HttpClientExample()
+        public RestClientExample()
         {
-            _client = new HttpClient();
+            _client = new RestClient();
         }
         public async Task Read()
         {
-            var response = await _client.GetAsync(_postEndPoint);
+            RestRequest request = new RestRequest(_postEndPoint,Method.Get);
+            var response = await _client.ExecuteAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
+                string jsonStr = response.Content!;
                 Console.WriteLine(jsonStr);
             }
         }
 
         public async Task Edit(int id)
         {
-            var response = await _client.GetAsync($"{_postEndPoint}/{id}");
+            RestRequest request = new RestRequest($"{_postEndPoint}/{id}", Method.Get);
+            var response = await _client.ExecuteAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
                 Console.WriteLine("No Data Found");
@@ -37,12 +41,12 @@ namespace YWSDotNetCore.ConsoleApp3
             }
             if (response.IsSuccessStatusCode)
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
+                string jsonStr = response.Content!;
                 Console.WriteLine(jsonStr);
             }
         }
 
-        public async Task Create(string title,string body,int userId)
+        public async Task Create(string title, string body, int userId)
         {
             PostModel requestModel = new PostModel()
             {
@@ -50,18 +54,19 @@ namespace YWSDotNetCore.ConsoleApp3
                 title = title,
                 userId = userId
             };
-           
-            var jsonrequest = JsonConvert.SerializeObject(requestModel);
-            var content = new StringContent(jsonrequest,Encoding.UTF8,Application.Json);
-            var response = await _client.PostAsync(_postEndPoint, content);
+
+            RestRequest request = new RestRequest(_postEndPoint, Method.Post);
+            request.AddBody(requestModel);
+
+            var response = await _client.ExecuteAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
+                string jsonStr = response.Content!;
                 Console.WriteLine(jsonStr);
             }
         }
 
-        public async Task Update(int id,string title, string body, int userId)
+        public async Task Update(int id, string title, string body, int userId)
         {
             PostModel requestModel = new PostModel()
             {
@@ -70,20 +75,22 @@ namespace YWSDotNetCore.ConsoleApp3
                 title = title,
                 userId = userId
             };
+            RestRequest request = new RestRequest(_postEndPoint, Method.Patch);
+            request.AddBody(requestModel);
 
-            var jsonrequest = JsonConvert.SerializeObject(requestModel);
-            var content = new StringContent(jsonrequest, Encoding.UTF8, Application.Json);
-            var response = await _client.PutAsync($"{_postEndPoint}/{id}", content);
+            var response = await _client.ExecuteAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
+                string jsonStr =  response.Content!;
                 Console.WriteLine(jsonStr);
             }
         }
 
         public async Task Delete(int id)
         {
-            var response = await _client.DeleteAsync($"{_postEndPoint}/{id}");
+            RestRequest request = new RestRequest($"{_postEndPoint}/{id}", Method.Delete);
+
+            var response = await _client.ExecuteAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
                 Console.WriteLine("No Data Found");
@@ -91,18 +98,9 @@ namespace YWSDotNetCore.ConsoleApp3
             }
             if (response.IsSuccessStatusCode)
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
+                string jsonStr =  response.Content!;
                 Console.WriteLine(jsonStr);
             }
         }
     }
-
-    public class PostModel
-    {
-        public int userId { get; set; }
-        public int id { get; set; }
-        public string title { get; set; }
-        public string body { get; set; }
-    }
-
 }
